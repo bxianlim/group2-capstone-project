@@ -162,7 +162,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-node-animated-fridaytrain/dev/1685161770918-2023-05-27T04:29:30.918Z/aws-node-animated-fridaytrain.zip"
+          "S3Key": "serverless/aws-node-animated-fridaytrain/dev/1685162148139-2023-05-27T04:35:48.139Z/aws-node-animated-fridaytrain.zip"
         },
         "Handler": "index.handler",
         "Runtime": "nodejs18.x",
@@ -180,14 +180,14 @@
         "ApiLogGroup"
       ]
     },
-    "ApiLambdaVersioncdCENWonblmxwUFQ8lbBl7Aab1ucuQ2bPagK2EU4yA": {
+    "ApiLambdaVersionzBqggqatRnzMENA6UAqZvejYTKiNVIMf90cBzXj1i8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "TBmp7yA7PDIebA0y1UHQp+zSh8o9+Q9uIVK7VfzpG7Y="
+        "CodeSha256": "x/XwRHX8GtNskEEbe2/a51v4EYcPbFT5yTX6mzJUT2c="
       }
     },
     "HttpApi": {
@@ -298,7 +298,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersioncdCENWonblmxwUFQ8lbBl7Aab1ucuQ2bPagK2EU4yA"
+        "Ref": "ApiLambdaVersionzBqggqatRnzMENA6UAqZvejYTKiNVIMf90cBzXj1i8"
       },
       "Export": {
         "Name": "sls-aws-node-animated-fridaytrain-dev-ApiLambdaFunctionQualifiedArn"
