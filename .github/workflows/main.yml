@@ -29,7 +29,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Run Installation of Dependencies Commands
-        run: npm audit
+        run: snyk test
 
   deploy:
     name: deploy
