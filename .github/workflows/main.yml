@@ -30,6 +30,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Run Installation of Dependencies Commands
         run: npm install
+      - name: Run Snyk test to check for vulnerabilities
+        run: snyk auth 9024f6dd-8149-49b6-9a07-8d04c53c37b5
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
         env:
