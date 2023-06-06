@@ -1,5 +1,5 @@
-name: CICD with Snyk
-run-name: ${{ github.actor }} is doing CICD with Snyk
+name: CICD with Serverless
+run-name: ${{ github.actor }} is doing CICD with Serverless
 
 on:
   push:
