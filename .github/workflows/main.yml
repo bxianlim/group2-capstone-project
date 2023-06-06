@@ -34,6 +34,7 @@ jobs:
         run: npm audit 
 
   deploy:
+    if: github.repository == 'main'
     name: deploy
     runs-on: ubuntu-latest
     needs: scan-dependencies
