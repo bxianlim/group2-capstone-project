@@ -1,4 +1,4 @@
-const { handler } = require('./handler');
+const { handler } = require('../index');
 
 describe('Test API Endpoints', () => {
   it('should return "Go Serverless v3.0! Your function executed successfully!"', async () => {
