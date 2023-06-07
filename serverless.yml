@@ -1,11 +1,12 @@
 # CHANGE-TO-YOURNAME-aws-node-animated-fridaytrain
-service: aws-node-animated-fridaytrain
+service: group2-capstone-project
 frameworkVersion: '3'
 
 provider:
   name: aws
   runtime: nodejs18.x
   region: ap-southeast-1
+  stage: ${env:DEPLOY_ENV}
 
 functions:
   api:
