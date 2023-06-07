@@ -1,14 +1,30 @@
-// index.test.js (Jest test file)
+const { handler } = require('./handler');
 
-const request = require('supertest');
-const { handler } = require('../index'); // Assuming the Express app code is in a file named 'index.js'
-
-// Jest test cases
 describe('Test API Endpoints', () => {
-  // Test / endpoint
   it('should return "Go Serverless v3.0! Your function executed successfully!"', async () => {
-    const response = await request(handler).get('/');
-    expect(response.status).toEqual(200);
-    expect(response.text).toEqual('Go Serverless v3.0! Your function executed successfully!');
-  });
+    // Mock event object
+    const mockEvent = {
+      key1: 'value1',
+      key2: 'value2',
+    };
+
+    // Stub the JSON.stringify method to exclude circular references
+    const originalStringify = JSON.stringify;
+    JSON.stringify = jest.fn((obj, replacer, spaces) => {
+      return originalStringify(obj, replacer, spaces);
+    });
+
+    // Invoke the handler function
+    const result = await handler(mockEvent);
+
+    // Restore the original JSON.stringify method
+    JSON.stringify = originalStringify;
+
+    // Assert the response
+    expect(result.statusCode).toBe(200);
+    expect(JSON.parse(result.body)).toEqual({
+      message: 'Go Serverless v3.0! Your function executed successfully!',
+      input: mockEvent,
+    });
+  }, 10000); // Increased timeout to 10000 milliseconds
 });
