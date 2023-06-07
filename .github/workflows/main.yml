@@ -39,6 +39,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+      - name: Run Installation of Dependencies Commands
+        run: npm install
       - name: Run Unit Tests
         run: npm test
 
