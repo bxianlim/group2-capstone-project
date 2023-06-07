@@ -3,10 +3,7 @@ const { handler } = require('../index');
 describe('Test API Endpoints', () => {
   it('should return "Go Serverless v3.0! Your function executed successfully!"', async () => {
     // Mock event object
-    const mockEvent = {
-      key1: 'value1',
-      key2: 'value2',
-    };
+    const mockEvent = {};
 
     // Stub the JSON.stringify method to exclude circular references
     const originalStringify = JSON.stringify;
