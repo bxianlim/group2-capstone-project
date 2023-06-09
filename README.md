@@ -11,6 +11,16 @@
 
 [Branch Creation](#branch-creation)
 
+[Branch Protection](#branch-protection)
+
+[Serverless Application](#serverless-application)
+
+[Unit tests](#unit-tests)
+
+[Package Vulnerability Scan](#package-vulnerability-scan)
+
+[GitHub Actions](#github-actions)
+
 # Company Profile
 AutomateTech Solutions is a cutting-edge startup specializing in DevOps automation and cloud-native solutions. Our team of highly skilled software engineers and DevOps experts is dedicated to streamlineing the release cycle process and enabling rapid and efficient deployment of our software applications.
 
@@ -49,7 +59,7 @@ $ git checkout -b feature
 $ git push origin feature
 ```
 
-## Branch protection
+# Branch Protection
 In order to implement the above mentioned branching strategy we create branch protection rule in the GitHub repository as follows:
 
 ![branch protect 1](https://github.com/bxianlim/group2-capstone-project/assets/22501900/bd3fce30-a38d-467c-ab1b-2a4953710eb0)
