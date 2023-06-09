@@ -4,16 +4,21 @@
 <br>
 <br>
 
+# Table of Contents
+[CI/CD Pipeline Overview](#pipeline-overview)
+
+[Branching Strategy](#branching-strategy)
+
 # Company Profile
 AutomateTech Solutions is a cutting-edge startup specializing in DevOps automation and cloud-native solutions. Our team of highly skilled software engineers and DevOps experts is dedicated to streamlineing the release cycle process and enabling rapid and efficient deployment of our software applications.
 
 # DevOps Mission Statement
-Our mission is to accelerate software deployment using CI/CD Pipeline so that each release cycle can ne released quickly from the development environment, to staging environment and to production environment.
+Our mission is to accelerate software deployment using CI/CD Pipeline so that each release cycle can be released quickly from the development environment, to staging environment and to production environment.
 
-# CI/CP Pipeline Overview
+# CI/CD Pipeline Overview <a name="pipeline-overview"></a>
 ![Pipeline](https://github.com/bxianlim/group2-capstone-project/assets/22501900/5ab9ef76-d49f-49f5-ab9d-10d808d8384a)
 
-# Branching Strategy
+# Branching Strategy <a name="branching-strategy"></a>
 As the company is going at a fast pace growth rhythm, there will be more engineers onboarding in the next few quaters. As such we need to ensure that as the team size grows, the release pipeline is well controlled. Keeping with these demands in mind, we are building a DevOps cycle with the this branching strategy:
 
 1. All `features` branches must be merged into `dev` branch.
@@ -131,7 +136,7 @@ How to set environment variable `DEPLOY_ENV` to the desired deploy environment w
 
 During automated deployment in CI/CD Pipeline, `DEPLOY_ENV` will be automatically set to the desired value depending on the branch where the commit was pushed to. This will be explained in more details when we look at [GitHub Actions](#github-actions) workflow.
 
-### Step 3: Deploy and verify that the serverless application is working `in local environment`
+### Step 3: Deploy and verify that the serverless application is working - **`local testing`**
 Install dependencies with:
 ```
 $ npm install
@@ -262,7 +267,7 @@ Tests help us to keep our code maintainable and working. Because even small chan
 
     This [index.test.js](__tests__/index.test.js) test script will invoke the application. Capture the output thrown out by the application and compare it with the expected output. The test is considerd pass when both the output equal or else the test is considered fail.
 
-3. Run the unit test `in local environment`
+3. Run the unit test - **`local testing`**
 
     ```sh
     $ npm test
@@ -287,7 +292,7 @@ We have successfully ran the unit test locally. This unit test will be implement
 # Package Vulnerability Scan
 It is crucial to incorporate package vulnerability scanning in our CI/CD Pipeline for maintaining the security and integrity of our software. It help reduce the risk of deploying insecure packages to production. By catching vulnerabilities early on and addressing them promptly, we minimize the chances of a security incident occurring in your live production environment.
 
-## Run vulnerability scan `in local environment`
+## Run vulnerability scan - `local testing`
 There are many vulnerability scan tools, we will use **npm audit** here:
 
 ```sh
@@ -449,7 +454,7 @@ jobs:
 
 **env**: Set the environment variables.
 
-### These are the jobs defined in [main.yml](.github/workflows/main.yml) and will be run in GitHub Actions workflow:
+### These are the jobs defined in [main.yml](.github/workflows/main.yml) which will be run in GitHub Actions workflow:
 
 Job name: `pre-deploy`
 ```yml
@@ -461,8 +466,11 @@ pre-deploy:
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 ```
 
-In `pre-deploy` job, useful information such as the triggered event name, branch and repository name is output using the **echo** command.
+In `pre-deploy` job, useful information such as the triggered event name, branch and repository name is output using the **echo** command. The **echo** output can be seen in the job details when it complete.
 
+![pre-deploy detail](https://github.com/bxianlim/group2-capstone-project/assets/22501900/b29a207e-4a06-45ca-ab6b-d5e1e04acf01)
+<br>
+<br>
 Job name: `install-dependencies`
 ```yml
 install-dependencies:
@@ -477,6 +485,9 @@ install-dependencies:
 
 In `install-dependencies` job, all the required dependencies are installed with **npm install** command. `pre-deploy` job must complete successfully before this job will run because of `needs: pre-deploy`.
 
+![install-dependencies workflow](https://github.com/bxianlim/group2-capstone-project/assets/22501900/e646ba29-d3ce-423b-a400-c8294217a05c)
+<br>
+<br>
 Job name: `scan-dependencies`
 ```yml
 scan-dependencies:
@@ -491,8 +502,11 @@ scan-dependencies:
           run: npm audit
 ```
 
-In `scan-dependencies` job, **npm audit** command is used to do package vulnerability scan. `install-dependencies` job must complete successfully before this job will run because of `needs: install-dependencies`.
+In `scan-dependencies` job, **npm audit** command is used to run the package vulnerability scan. `install-dependencies` job must complete successfully before this job will run because of `needs: install-dependencies`.
 
+![scan-dependencies workflow](https://github.com/bxianlim/group2-capstone-project/assets/22501900/48b55384-07c2-4cbd-994b-901c9f57ee53)
+<br>
+<br>
 Job name: `unit-tests`
 ```yml
 runs-on: ubuntu-latest
@@ -510,6 +524,9 @@ In `unit-tests` job, **npm test** command is used to run unit test. `install-dep
 
 As both `scan-dependencies` and `unit-tests` jobs `needs: install-dependencies`, these 2 jobs will run in parallel after `install-dependencies` job is completed.
 
+![unit-test workflow](https://github.com/bxianlim/group2-capstone-project/assets/22501900/4d7ffd2a-8f90-4c9a-8689-c3fdaff3ff1d)
+<br>
+<br>
 Job name: `deploy-prod`
 ```yml
 deploy-prod:
@@ -543,9 +560,9 @@ if:  github.ref == 'refs/heads/main'
 ```
 This job will not run if the commit is push to other branches (e.g. `dev` or `staging`)
 
-Both `scan-dependencies` and `unit-tests` jobs must complete successfully before this job will run because of needs: [scan-dependencies, unit-tests].
+Both `scan-dependencies` and `unit-tests` jobs must complete successfully before this job will run because of `needs: [scan-dependencies, unit-tests]`.
 
-The serverless application is deployed in the following step:
+The serverless application is deployed in the this step:
 ```
 - name: serverless deploy
       uses: serverless/github-action@v3.2
@@ -573,31 +590,80 @@ provider:
 This use of environment variable `DEPLOY_ENV` ensure that the serverless application is deployed to the `prod` environment in this case where the commit is push to `main` branch.
 
 `AWS_ACCESS_KEY_ID` & `AWS_SECRET_ACCESS_KEY` - these 2 environment variables hold the AWS credentials stored as GitHub Secrets described in the next step. The AWS credentials is required to access AWS Lamda service from within the CI/CD Pipeline.
+<br>
+<br>
+Job name: `deploy-staging` & `deploy-dev`
+
+These 2 jobs are almost identical to `deploy-prod` except the followings:
+
+1. The `if` condition is used to check for commit push to `staging` and `dev` branch respectively.
+   ```yml
+   deploy-staging:
+       if: github.ref == 'refs/heads/staging'
+   ```
+   ```yml
+   deploy-dev:
+       if: github.ref == 'refs/heads/dev'
+   ```
+
+2. The `DEPLOY_ENV` variable is set to **staging** and **dev** when the commit is push to `staging` and `dev` branch respectively.
+
+   `deploy-staging`
+   ```yml
+   env:
+        DEPLOY_ENV: 'staging'
+   ```
+   `deploy-dev`
+   ```yml
+   env:
+        DEPLOY_ENV: 'dev'
+   ```
 
 ### Step 2: Add AWS_ACCESS_KEY_ID and ASW_SECRET_ACCESS_KEY to GitHub Secrets
-![github secret](https://github.com/bxianlim/group2-capstone-project/assets/22501900/4a3d7533-36d5-42f4-ba30-703d09c5be9d)
+- Go to Settings > Secret and variables > Actions and click `New repository secret`
+
+![github secret-1](https://github.com/bxianlim/group2-capstone-project/assets/22501900/23b6dd29-b4c9-4170-9f08-c3d6b67113d4)
+
+- Add **AWS_ACCESS_KEY_ID** & **ASW_SECRET_ACCESS_KEY**
+
+![github secret-2](https://github.com/bxianlim/group2-capstone-project/assets/22501900/c1aed240-49fa-4bb4-890a-cc392a8b005b)
+
+- Both secrets added as show below
+
+![github secret-3](https://github.com/bxianlim/group2-capstone-project/assets/22501900/ead9b249-b3fa-462a-b40d-8290b2c38da3)
 
 ### Step 3: Create a pull request and commit a merge in GitHub to start the workflow
-Create a new pull request
+- Create a `New pull request`
 
 ![image](https://github.com/bxianlim/group2-capstone-project/assets/22501900/520d5317-4be8-473c-bc1a-5174b9588593)
 
-Choose the desired base and merge branch, and click **Create pull request**
+- Choose the desired base and merge branch, and click `Create pull request`
 
 ![compare changes](https://github.com/bxianlim/group2-capstone-project/assets/22501900/53846345-0d97-412d-afde-1b0879719cb5)
 
-A new pull request is now open. Leave a comment and click **Create pull request**
+- A new pull request is now open. Leave a comment and click `Create pull request`
 
 ![open PR](https://github.com/bxianlim/group2-capstone-project/assets/22501900/0de90b64-444c-4119-b38b-6173183080aa)
 
-Review the pull request
+- Review the pull request
 
 ![add review](https://github.com/bxianlim/group2-capstone-project/assets/22501900/e69386e5-ee31-4435-a23c-792f817ab4b7)
 
-Approve and submit the pull request
+- Approve and submit the pull request
 
 ![submit review](https://github.com/bxianlim/group2-capstone-project/assets/22501900/9667214a-f0d3-4ea9-8b37-802d1d45dde9)
 
-Navigate the repo on GitHub, click on the **Actions** tab to see the workflows.
+- Navigate the repo on GitHub, click on the `Actions` tab to see the workflows.
 
 ![workflow](https://github.com/bxianlim/group2-capstone-project/assets/22501900/13a668bd-5d3f-4d23-8a7c-6db03c3dbb10)
+
+This pull request is merging `feature2` into `dev` branch which resulted in `deploy-dev` job being ran whereas `deploy-prod` and `deploy-staging` were skipped.
+
+# Conclusion
+In this document we cover all aspect of our CI/CD Pipeline, including:
+1. Branching strategy
+2. GitHub branch creation & protection
+3. Serverless application deployment
+4. Unit test
+5. Package vulnerability scan
+6. GitHub Actions Workflow
