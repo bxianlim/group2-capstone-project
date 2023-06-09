@@ -450,5 +450,20 @@ jobs:
 ### Step 2: Add AWS_ACCESS_KEY_ID and ASW_SECRET_ACCESS_KEY to GitHub Secrets
 ![github secret](https://github.com/bxianlim/group2-capstone-project/assets/22501900/4a3d7533-36d5-42f4-ba30-703d09c5be9d)
 
-### Step 8: Create a pull request and commit a merge in GitHub to start the workflow
-Commit changes locally and push it to GitHub. Navigate the repo on GitHub, click on the **Actions** tab to see the workflows.
+### Step 3: Create a pull request and commit a merge in GitHub to start the workflow
+Create a new pull request
+![image](https://github.com/bxianlim/group2-capstone-project/assets/22501900/520d5317-4be8-473c-bc1a-5174b9588593)
+
+Choose the desired base and merge branch, and click **Create pull request**
+![compare changes](https://github.com/bxianlim/group2-capstone-project/assets/22501900/53846345-0d97-412d-afde-1b0879719cb5)
+
+A new pull request is now open. Leave a comment and click **Create pull request**
+![open PR](https://github.com/bxianlim/group2-capstone-project/assets/22501900/0de90b64-444c-4119-b38b-6173183080aa)
+
+Review the pull request
+![add review](https://github.com/bxianlim/group2-capstone-project/assets/22501900/e69386e5-ee31-4435-a23c-792f817ab4b7)
+
+Approve and submit the pull request
+![submit review](https://github.com/bxianlim/group2-capstone-project/assets/22501900/9667214a-f0d3-4ea9-8b37-802d1d45dde9)
+
+Navigate the repo on GitHub, click on the **Actions** tab to see the workflows.
