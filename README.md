@@ -2,24 +2,6 @@
 ## `Case 1 - CI/CD Pipeline`
 ### `Group 2 - Taufiq, Bing Xian & Liau`
 <br>
-<br>
-
-# Table of Contents
-[CI/CD Pipeline Overview](#pipeline-overview)
-
-[Branching Strategy](#branching-strategy)
-
-[Branch Creation](#branch-creation)
-
-[Branch Protection](#branch-protection)
-
-[Serverless Application](#serverless-application)
-
-[Unit tests](#unit-tests)
-
-[Package Vulnerability Scan](#package-vulnerability-scan)
-
-[GitHub Actions](#github-actions)
 
 # Company Profile
 AutomateTech Solutions is a cutting-edge startup specializing in DevOps automation and cloud-native solutions. Our team of highly skilled software engineers and DevOps experts is dedicated to streamlineing the release cycle process and enabling rapid and efficient deployment of our software applications.
