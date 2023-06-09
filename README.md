@@ -9,6 +9,8 @@
 
 [Branching Strategy](#branching-strategy)
 
+[Branch Creation](#branch-creation)
+
 # Company Profile
 AutomateTech Solutions is a cutting-edge startup specializing in DevOps automation and cloud-native solutions. Our team of highly skilled software engineers and DevOps experts is dedicated to streamlineing the release cycle process and enabling rapid and efficient deployment of our software applications.
 
