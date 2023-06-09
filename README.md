@@ -1,8 +1,9 @@
-# (SCTP) Cloud Infrastructure Enginerring Capstone Project Documentation
+# (SCTP) Cloud Infrastructure Engineering Capstone Project Documentation
 ## Case 1 - CI/CD Pipeline
 ### Group 2 - Taufiq, Bing Xian & Liau
-\  
-\
+<br>
+<br>
+
 # Company Profile
 AutomateTech Solutions is a cutting-edge startup specializing in DevOps automation and cloud-native solutions. Our team of highly skilled software engineers and DevOps experts is dedicated to streamlineing the release cycle process and enabling rapid and efficient deployment of our software applications.
 
@@ -10,8 +11,7 @@ AutomateTech Solutions is a cutting-edge startup specializing in DevOps automati
 Our mission is to accelerate software deployment using CI/CD Pipeline so that each release cycle can ne released quickly from the development environment, to staging environment and to production environment.
 
 # CI/CP Pipeline Overview
-
-<image>
+![Pipeline](https://github.com/bxianlim/group2-capstone-project/assets/22501900/5ab9ef76-d49f-49f5-ab9d-10d808d8384a)
 
 # Branching Strategy
 As the company is going at a fast pace growth rhythm, there will be more engineers onboarding in the next few quaters. As such we need to ensure that as the team size grows, the release pipeline is well controlled. Keeping with these demands in mind, we are building a DevOps cycle with the this branching strategy:
@@ -21,7 +21,8 @@ As the company is going at a fast pace growth rhythm, there will be more enginee
 3. **main** branch must be merged from **staging** branch.
 
 The following diagram illustrate this branching strategy:
-<image>
+
+![branching strategy](https://github.com/bxianlim/group2-capstone-project/assets/22501900/31730434-0fa3-4009-bab6-8cf7e70ebcbe)
 
 # Branch Creation
 Branch can be created from GitHub repository or command line. Below are the command line to create the desired branches for our CI/CD Pipeline:
@@ -44,8 +45,8 @@ $ git push origin feature
 ## Branch protection
 In order to implement the above mentioned branching strategy we create branch protection rule in the GitHub repository as follows:
 
-<image 1>
-<image 2>
+![branch protect 1](https://github.com/bxianlim/group2-capstone-project/assets/22501900/bd3fce30-a38d-467c-ab1b-2a4953710eb0)
+![branch protect 2](https://github.com/bxianlim/group2-capstone-project/assets/22501900/faa129c7-b666-4dec-a498-5679b1f89c4d)
 
 With the branch protection rule applied direct commit to **dev**, **stage** & **main** branch will be rejected as shown below:
 ```sh
@@ -66,7 +67,7 @@ error: failed to push some refs to 'GitHub.com:bxianlim/group2-capstone-project.
 
 The branch protection rule ensure that all commits to **dev**, **staging** & **main** branch must be made to a non-protected branch (i.e. feature branch) and submitted via a pull request. In addition each pull request require approvals. Merging will be blocked until the pull request is reviewed and approved by someone else other than the person who created the pull request.
 
-<image>
+![review required](https://github.com/bxianlim/group2-capstone-project/assets/22501900/e1d287c3-32b5-46be-9015-4086471a2598)
 
 # Serverless Application
 This CI/CD Pipeline automate the deployment of a serverless application with AWS **Lambda** serverless compute service. AWS **Lambda** allow us to run code without provisoning or managing infrastruture. This kind of AWS service is well suited for a startup company like us to save costs by paying only for the compute time we use -- *by per-millisecond* -- instead of provisioning infrastructure upfron for peak capacity.
@@ -74,7 +75,7 @@ This CI/CD Pipeline automate the deployment of a serverless application with AWS
 ## These are the steps to create the serverless application
 
 ### Step 1: Create index.js file -- *this is the main application code*
-<image>
+![index_js](https://github.com/bxianlim/group2-capstone-project/assets/22501900/fa028f97-a481-4833-a275-ceb4a132b59d)
 
 [index.js](index.js)
 ```js
@@ -94,7 +95,7 @@ module.exports.handler = async (event) => {
 ```
 
 ### Step 2: Create serverless.yml
-<image>
+![serverless_yml](https://github.com/bxianlim/group2-capstone-project/assets/22501900/3a2da739-794f-47ab-91f2-0bbb71cb76a3)
 
 [serverless.yml](serverless.yml)
 ```yaml
@@ -224,7 +225,8 @@ Tests help us to keep our code maintainable and working. Because even small chan
    When we run Jest, it's going to search for tests in our repo. It is recommened to have a folder that holds our test script.
 
    Create **index.test.js** inside \__tests\__ folder
-   <image>
+   
+   ![__test__](https://github.com/bxianlim/group2-capstone-project/assets/22501900/4dc508db-3bb6-47dd-ab5f-7a93d7601b86)
 
    [index.test.js](__tests__/index.test.js)
 
@@ -306,7 +308,7 @@ We use event to trigger the workflow in our CI/CD Pipeline. Whenever a code chan
 The following outline the steps required to create a GitHub Actions workflow.
 
 ### Step 1: Create **main.yml** in **.github/workflows** folder
-<image>
+![main_yml](https://github.com/bxianlim/group2-capstone-project/assets/22501900/57973d19-e7aa-4bd1-b17d-1879c0fb8a7c)
 
 [main.yml](.github/workflows/main.yml)
 ```yml
@@ -446,7 +448,7 @@ jobs:
 **env**: Set the environment variables.
 
 ### Step 2: Add AWS_ACCESS_KEY_ID and ASW_SECRET_ACCESS_KEY to GitHub Secrets
-<image>
+![github secret](https://github.com/bxianlim/group2-capstone-project/assets/22501900/4a3d7533-36d5-42f4-ba30-703d09c5be9d)
 
 ### Step 8: Create a pull request and commit a merge in GitHub to start the workflow
 Commit changes locally and push it to GitHub. Navigate the repo on GitHub, click on the **Actions** tab to see the workflows.
