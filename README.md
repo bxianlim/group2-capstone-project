@@ -472,3 +472,5 @@ Approve and submit the pull request
 ![submit review](https://github.com/bxianlim/group2-capstone-project/assets/22501900/9667214a-f0d3-4ea9-8b37-802d1d45dde9)
 
 Navigate the repo on GitHub, click on the **Actions** tab to see the workflows.
+
+![workflow](https://github.com/bxianlim/group2-capstone-project/assets/22501900/13a668bd-5d3f-4d23-8a7c-6db03c3dbb10)
