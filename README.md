@@ -1,6 +1,6 @@
 # (SCTP) Cloud Infrastructure Engineering Capstone Project Documentation
-## Case 1 - CI/CD Pipeline
-### Group 2 - Taufiq, Bing Xian & Liau
+## `Case 1 - CI/CD Pipeline`
+### `Group 2 - Taufiq, Bing Xian & Liau`
 <br>
 <br>
 
@@ -16,9 +16,9 @@ Our mission is to accelerate software deployment using CI/CD Pipeline so that ea
 # Branching Strategy
 As the company is going at a fast pace growth rhythm, there will be more engineers onboarding in the next few quaters. As such we need to ensure that as the team size grows, the release pipeline is well controlled. Keeping with these demands in mind, we are building a DevOps cycle with the this branching strategy:
 
-1. All **features** branches must be merged into **dev** branch.
-2. **staging** branch must be merged from **dev** branch.
-3. **main** branch must be merged from **staging** branch.
+1. All `features` branches must be merged into `dev` branch.
+2. `staging` branch must be merged from `dev` branch.
+3. `main` branch must be merged from `dev` branch.
 
 The following diagram illustrate this branching strategy:
 
@@ -48,7 +48,7 @@ In order to implement the above mentioned branching strategy we create branch pr
 ![branch protect 1](https://github.com/bxianlim/group2-capstone-project/assets/22501900/bd3fce30-a38d-467c-ab1b-2a4953710eb0)
 ![branch protect 2](https://github.com/bxianlim/group2-capstone-project/assets/22501900/faa129c7-b666-4dec-a498-5679b1f89c4d)
 
-With the branch protection rule applied direct commit to **dev**, **stage** & **main** branch will be rejected as shown below:
+With the branch protection rule applied direct commit push to `dev`, `stage` & `main` branch will be rejected as shown below:
 ```sh
 $ git push
 Enumerating objects: 5, done.
@@ -65,7 +65,7 @@ To GitHub.com:bxianlim/group2-capstone-project.git
 error: failed to push some refs to 'GitHub.com:bxianlim/group2-capstone-project.git'
 ```
 
-The branch protection rule ensure that all commits to **dev**, **staging** & **main** branch must be made to a non-protected branch (i.e. feature branch) and submitted via a pull request. In addition each pull request require approvals. Merging will be blocked until the pull request is reviewed and approved by someone else other than the person who created the pull request.
+The branch protection rule ensure that all commits to `dev`, `staging` & `main` branch must be made to a non-protected branch (i.e. `feature` branch) and submitted via a pull request. In addition each pull request require approvals. Merging will be blocked until the pull request is reviewed and approved by someone else other than the person who created the pull request.
 
 ![review required](https://github.com/bxianlim/group2-capstone-project/assets/22501900/e1d287c3-32b5-46be-9015-4086471a2598)
 
@@ -74,7 +74,7 @@ This CI/CD Pipeline automate the deployment of a serverless application with AWS
 
 ## These are the steps to create the serverless application
 
-### Step 1: Create index.js file -- *this is the main application code*
+### Step 1: Create index.js file -- `this is the main application code`
 ![index_js](https://github.com/bxianlim/group2-capstone-project/assets/22501900/fa028f97-a481-4833-a275-ceb4a132b59d)
 
 [index.js](index.js)
@@ -121,23 +121,23 @@ plugins:
 ```
 
 **Note**:
-**DEPLOY_ENV** is a environment variable used to switch the deploy environment depending on whether the code change is committed to **dev**, **staging** or **main** branch.
+`DEPLOY_ENV` is a environment variable used to switch the deploy environment depending on whether the code change is committed to `dev`, `staging` or `main` branch.
 
-- commit to **dev** branch     -> deploy the application to **dev** environment
-- commit to **staging** branch -> deploy the application to **staging** environment
-- commit to **main** branch    -> deploy the application to **prod** environment
+- commit to `dev` branch     -> deploy the application to `dev` environment
+- commit to `staging` branch -> deploy the application to `staging` environment
+- commit to `main` branch    -> deploy the application to `prod` environment
 
-How to set environment variable **DEPLOY_ENV** to the desired deploy environment when testing locally will be explained in the next step.
+How to set environment variable `DEPLOY_ENV` to the desired deploy environment when testing locally will be explained in the next step.
 
-During automated deployment in CI/CD Pipeline, **DEPLOY_ENV** will be automatically set to the desired value depending on the branch where the commit was pushed to. This will be explained in more details when we look at GitHub Actions workflow.
+During automated deployment in CI/CD Pipeline, `DEPLOY_ENV` will be automatically set to the desired value depending on the branch where the commit was pushed to. This will be explained in more details when we look at [GitHub Actions](#github-actions) workflow.
 
-### Step 3: Deploy and verify that the serverless application is working
+### Step 3: Deploy and verify that the serverless application is working `in local environment`
 Install dependencies with:
 ```
 $ npm install
 ```
 
-and then deploy to **prod** environment with:
+and then deploy to `prod` environment with:
 ```
 $ export DEPLOY_ENV=prod
 $ serverless deploy
@@ -210,7 +210,7 @@ Tests help us to keep our code maintainable and working. Because even small chan
    ```
    $ npm install --save-dev jest
    ```
-   The *--save-dev* flag updates the **devDepenendices** in package.json. These are only used for local testing and development.
+   The *--save-dev* flag updates the `devDepenendices` in package.json. These are only used for local testing and development.
 
    package.json
    ```json
@@ -262,7 +262,7 @@ Tests help us to keep our code maintainable and working. Because even small chan
 
     This [index.test.js](__tests__/index.test.js) test script will invoke the application. Capture the output thrown out by the application and compare it with the expected output. The test is considerd pass when both the output equal or else the test is considered fail.
 
-3. Run the unit test
+3. Run the unit test `in local environment`
 
     ```sh
     $ npm test
@@ -282,12 +282,12 @@ Tests help us to keep our code maintainable and working. Because even small chan
     ```
     The output from **npm test** command shows that the unit test has passed.
 
-We have successfully ran the unit test locally. This unit test will be implemented in the CI/CD Pipeline and automatically triggered in GitHub Actions workflow.
+We have successfully ran the unit test locally. This unit test will be implemented in the CI/CD Pipeline and automatically triggered in [GitHub Actions](#github-actions) workflow.
 
 # Package Vulnerability Scan
 It is crucial to incorporate package vulnerability scanning in our CI/CD Pipeline for maintaining the security and integrity of our software. It help reduce the risk of deploying insecure packages to production. By catching vulnerabilities early on and addressing them promptly, we minimize the chances of a security incident occurring in your live production environment.
 
-## Run vulnerability scan
+## Run vulnerability scan `in local environment`
 There are many vulnerability scan tools, we will use **npm audit** here:
 
 ```sh
@@ -303,7 +303,9 @@ We use GitHub Actions to automate our CI/CD Pipeline. Our CI/CD Pipeline build, 
 ## About GitHub Actions Workflows
 A workflow is a configurable automated process that will run one or more jobs. Workflows are defined by a YAML file checked in to our repository and will run when triggered by an event in our repository, or they can be triggered manually, or at a defined schedule.
 
-We use event to trigger the workflow in our CI/CD Pipeline. Whenever a code change is push to the GitHub respository the workflow will be triggered and run unit test, package vulnerability scan and deploy the serverless application to the desired environment.
+We use event to trigger the workflow in our CI/CD Pipeline.
+
+Earlier we run unit test, vulnerability scan and deploy serverless application in local environment. It is now time to set up a CI/CP Pipeline that run all these jobs automatically whenever a code change is push to the GitHub respository.
 
 The following outline the steps required to create a GitHub Actions workflow.
 
@@ -446,6 +448,131 @@ jobs:
 **run**: Runs command line programs.
 
 **env**: Set the environment variables.
+
+### These are the jobs defined in [main.yml](.github/workflows/main.yml) and will be run in GitHub Actions workflow:
+
+Job name: `pre-deploy`
+```yml
+pre-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+```
+
+In `pre-deploy` job, useful information such as the triggered event name, branch and repository name is output using the **echo** command.
+
+Job name: `install-dependencies`
+```yml
+install-dependencies:
+    runs-on: ubuntu-latest
+    needs: pre-deploy
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Run Installation of Dependencies Commands
+        run: npm install
+```
+
+In `install-dependencies` job, all the required dependencies are installed with **npm install** command. `pre-deploy` job must complete successfully before this job will run because of `needs: pre-deploy`.
+
+Job name: `scan-dependencies`
+```yml
+scan-dependencies:
+    runs-on: ubuntu-latest
+    needs: install-dependencies
+    steps:
+        - name: Check out repository code
+          uses: actions/checkout@v3
+        - name: Run Installation of Dependencies Commands
+          run: npm install
+        - name: Run npm audit to check for vulnerabilities
+          run: npm audit
+```
+
+In `scan-dependencies` job, **npm audit** command is used to do package vulnerability scan. `install-dependencies` job must complete successfully before this job will run because of `needs: install-dependencies`.
+
+Job name: `unit-tests`
+```yml
+runs-on: ubuntu-latest
+    needs: install-dependencies
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Run Installation of Dependencies Commands
+        run: npm install
+      - name: Run Unit Tests
+        run: npm test
+```
+
+In `unit-tests` job, **npm test** command is used to run unit test. `install-dependencies` job must complete successfully before this job will run because of `needs: install-dependencies`.
+
+As both `scan-dependencies` and `unit-tests` jobs `needs: install-dependencies`, these 2 jobs will run in parallel after `install-dependencies` job is completed.
+
+Job name: `deploy-prod`
+```yml
+deploy-prod:
+    if:  github.ref == 'refs/heads/main'
+    name: deploy to prod
+    runs-on: ubuntu-latest
+    needs: [scan-dependencies, unit-tests]
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - name: serverless deploy
+      uses: serverless/github-action@v3.2
+      with:
+        args: deploy
+      env:
+        DEPLOY_ENV: 'prod'
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+```
+
+In `deploy-prod` job, we check whether the commit is push to main branch with the `if` condition:
+```
+if:  github.ref == 'refs/heads/main'
+```
+This job will not run if the commit is push to other branches (e.g. `dev` or `staging`)
+
+Both `scan-dependencies` and `unit-tests` jobs must complete successfully before this job will run because of needs: [scan-dependencies, unit-tests].
+
+The serverless application is deployed in the following step:
+```
+- name: serverless deploy
+      uses: serverless/github-action@v3.2
+      with:
+        args: deploy
+      env:
+        DEPLOY_ENV: 'prod'
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}      
+``` 
+
+Notice that there are 3 environment variables defined in the `serverless deploy` step:
+
+`DEPLOY_ENV` - the value of this variable is set to **prod** and will be referenced in [serverless.yml](serverless.yml) as shown below:
+
+[serverless.yml](serverless.yml)
+```yml
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-southeast-1
+  stage: ${env:DEPLOY_ENV}
+ ``` 
+
+This use of environment variable `DEPLOY_ENV` ensure that the serverless application is deployed to the `prod` environment in this case where the commit is push to `main` branch.
+
+`AWS_ACCESS_KEY_ID` & `AWS_SECRET_ACCESS_KEY` - these 2 environment variables hold the AWS credentials stored as GitHub Secrets described in the next step. The AWS credentials is required to access AWS Lamda service from within the CI/CD Pipeline.
 
 ### Step 2: Add AWS_ACCESS_KEY_ID and ASW_SECRET_ACCESS_KEY to GitHub Secrets
 ![github secret](https://github.com/bxianlim/group2-capstone-project/assets/22501900/4a3d7533-36d5-42f4-ba30-703d09c5be9d)
