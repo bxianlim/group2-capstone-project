@@ -13,7 +13,7 @@
         "serverless": "^3.32.2"
     },
     "devDependencies": {
-        "jest": "^29.5.0",
+        "jest": "^25.0.0",
         "serverless-offline": "^8.8.1",
         "supertest": "^6.3.3"
     }
