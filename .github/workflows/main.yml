@@ -31,7 +31,7 @@ jobs:
       - name: Run Installation of Dependencies Commands
         run: npm install
       - name: Run npm audit to check for vulnerabilities
-        run: npm audit
+        run: npm audit --audit-level=high
   
   unit-tests:
     runs-on: ubuntu-latest
